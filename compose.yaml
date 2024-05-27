@@ -1,0 +1,33 @@
+
+services:
+  # backend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.backend.dev
+  #   ports:
+  #     - "8888:8888"
+  #   volumes:
+  #     - ./:/usr/src/service
+  #   environment:
+  #     - DATABASE_URL=postgres://monoqldev:wE0PvMXHdHgOF6aaKxqFfjkl78943hjk8fHj2YODCxLk@postgres:5432/monoql
+  #     - PORT=8888
+  #   depends_on:
+  #     - postgres
+  #   command: bash -c "cargo watch -x 'run --bin monoql'"
+
+  #     - DATABASE_URL=postgres://dev:wE0PvMXHdHgOF6aaKxqFfjkl78943hjk8fHj2YODCxLk@localhost:5432/development
+  postgres:
+    container_name: project_db
+    image: postgres:15.4
+    environment:
+      POSTGRES_USER: dev 
+      POSTGRES_PASSWORD: wE0PvMXHdHgOF6aaKxqFfjkl78943hjk8fHj2YODCxLk
+      POSTGRES_DB: development
+      PGDATA: /data/postgres
+    volumes:
+      - project_db:/data/postgres
+    ports:
+      - "5432:5432"
+volumes:
+  project_db:
+    driver: local
