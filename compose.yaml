@@ -9,7 +9,8 @@ services:
   #   volumes:
   #     - ./:/usr/src/service
   #   environment:
-  #     - DATABASE_URL=postgres://monoqldev:wE0PvMXHdHgOF6aaKxqFfjkl78943hjk8fHj2YODCxLk@postgres:5432/monoql
+  #     -
+  #     DATABASE_URL=postgres://dev:wE0PvMXHdHgOF6aaKxqFfjkl78943hjk8fHj2YODCxLk@postgres:5432/development
   #     - PORT=8888
   #   depends_on:
   #     - postgres
@@ -17,7 +18,7 @@ services:
 
   #     - DATABASE_URL=postgres://dev:wE0PvMXHdHgOF6aaKxqFfjkl78943hjk8fHj2YODCxLk@localhost:5432/development
   postgres:
-    container_name: project_db
+    container_name: {{project-name}}_db
     image: postgres:15.4
     environment:
       POSTGRES_USER: dev 
@@ -25,9 +26,9 @@ services:
       POSTGRES_DB: development
       PGDATA: /data/postgres
     volumes:
-      - project_db:/data/postgres
+      - {{project-name}}_db:/data/postgres
     ports:
       - "5432:5432"
 volumes:
-  project_db:
+  {{project-name}}_db:
     driver: local
